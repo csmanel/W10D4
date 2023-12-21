@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import harvardArt from './data/harvardArt';
 import GalleryNavigation from './components/GalleryNavigation/GalleryNavigation';
 import GalleryView from './components/GalleryView/GalleryView';
+import ArtDescription from './components/ArtDescription/ArtDescription';
 
 function Layout() {
   return (
@@ -17,6 +18,7 @@ function Layout() {
 const router = createBrowserRouter([
   {
     element: <Layout />,
+    errorElement: <PageMissing />,
     children: [
       {
         path: '/',
@@ -36,7 +38,16 @@ const router = createBrowserRouter([
       },
       {
         path: 'galleries/:galleryId/',
-        element: <GalleryView galleries={harvardArt.records} />,
+        children: [
+          {
+            index: true,
+            element: <GalleryView galleries={harvardArt.records} />,
+          },
+          {
+            path: 'art/:artId',
+            element: <ArtDescription galleries={harvardArt.records} />,
+          },
+        ],
       },
     ],
   },
@@ -47,3 +58,7 @@ function App() {
 }
 
 export default App;
+
+function PageMissing() {
+  return <h2>Page Not Found</h2>;
+}
