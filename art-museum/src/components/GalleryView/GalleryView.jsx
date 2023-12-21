@@ -10,7 +10,7 @@ export default function GalleryView({ galleries }) {
   const imageTiles = gallery.objects.map((artwork => {
     return <ArtImageTile key={artwork.id} art={artwork} />
   }))
-
+  console.log(gallery)
 
   return (
     <>
