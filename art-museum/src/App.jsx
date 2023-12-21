@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import harvardArt from './data/harvardArt';
 import GalleryNavigation from './components/GalleryNavigation/GalleryNavigation';
+import GalleryView from './components/GalleryView/GalleryView';
 
 function Layout() {
   return (
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '*',
         element: <h2>Page Not Found</h2>,
+      },
+      {
+        path: 'galleries/:galleryId/',
+        element: <GalleryView galleries={harvardArt.records} />,
       },
     ],
   },
